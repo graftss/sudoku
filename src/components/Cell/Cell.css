@@ -1,0 +1,50 @@
+:root {
+  --cell-border: 1px solid #666;
+  --edge-border: 4px solid black;
+  --divider-border: 2px solid black;
+}
+
+.cell {
+  border: var(--cell-border);
+  cursor: pointer;
+}
+
+.cell:hover {
+  background-color: red;
+}
+
+.cell:active:hover {
+  text-decoration: underline
+}
+
+.cell-edge-right {
+  border-right: var(--edge-border);
+}
+
+.cell-edge-left {
+  border-left: var(--edge-border);
+}
+
+.cell-edge-bottom {
+  border-bottom: var(--edge-border);
+}
+
+.cell-edge-top {
+  border-top: var(--edge-border);
+}
+
+.cell-divider-right {
+  border-right: var(--divider-border);
+}
+
+.cell-divider-left {
+  border-left: var(--divider-border);
+}
+
+.cell-divider-bottom {
+  border-bottom: var(--divider-border);
+}
+
+.cell-divider-top {
+  border-top: var(--divider-border);
+}

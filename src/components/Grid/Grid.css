@@ -1,0 +1,11 @@
+.grid {
+  background-color: lightblue;
+
+  margin: 0 auto;
+  width: 500px;
+  height: 500px;
+
+  display: table;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
