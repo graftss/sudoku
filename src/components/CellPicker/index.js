@@ -1,25 +1,20 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 import pick from './pick';
 import './CellPicker.css';
 
-const initialState = {
-  mouseDown: false,
-  mouseDownX: null,
-  mouseDownY: null,
-  display: null,
-};
-
-class CellPicker extends Component {
+export default class CellPicker extends Component {
   constructor() {
     super();
 
-    this.state = { ...initialState };
+    this.state = { selection: null };
   }
 
   componentDidMount() {
     window.addEventListener('mouseup', this.onMouseUp, false);
     window.addEventListener('mousemove', this.onMouseMove, false);
+
+    this.updateDisplay(0, 0);
   }
 
   componentWillUnmount() {
@@ -27,60 +22,33 @@ class CellPicker extends Component {
     window.removeEventListener('mousemove', this.onMouseMove, false);
   }
 
-  onMouseDown = e => {
-    const { clientX, clientY } = e;
-
-    this.setState({
-      mouseDown: true,
-      mouseDownX: clientX,
-      mouseDownY: clientY,
-    });
-
-    this.updateDisplay(0, 0);
-  }
-
   onMouseUp = e => {
-    const { mouseDownX, mouseDownY } = this.state;
-    const { clientX, clientY } = e;
+    const { onMouseUp } = this.props;
+    const { selection } = this.state;
 
-    const dx = clientX - mouseDownX;
-    const dy = clientY - mouseDownY;
-
-    this.setState(initialState);
+    onMouseUp && onMouseUp(selection);
   }
 
   onMouseMove = e => {
-    const { mouseDown, mouseDownX, mouseDownY } = this.state;
+    const { x, y } = this.props;
     const { clientX, clientY } = e;
 
-    if (!mouseDown) return;
-
-    this.updateDisplay(clientX - mouseDownX, clientY - mouseDownY);
+    this.updateDisplay(clientX - x, clientY - y);
   }
 
   updateDisplay(dx, dy) {
-    const { cellSizePx, cols, rows } = this.props;
+    const { cellSizePx, cols, mapIndex, rows } = this.props;
 
     const index = pick(rows, cols, cellSizePx, dx, dy);
-    const display = index === null ? null : index + 1;
+    const selection = mapIndex ? mapIndex(index) : index;
 
-    this.setState({ display });
+    this.setState({ selection });
   }
 
   render() {
-    const { display } = this.state;
+    const { selection } = this.state;
+    const { render } = this.props;
 
-    return (
-      <div className="cell-picker-container">
-        <div
-          className="capture-mousedown noselect"
-          onMouseDown={this.onMouseDown}
-        >
-          {display}
-        </div>
-      </div>
-    );
+    return render(selection);
   }
 }
-
-export default CellPicker;

@@ -7,6 +7,9 @@
 .cell {
   border: var(--cell-border);
   cursor: pointer;
+
+  width: 70px;
+  height: 70px;
 }
 
 .cell:hover {

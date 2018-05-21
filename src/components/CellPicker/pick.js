@@ -12,8 +12,6 @@ export default (rows, cols, cellSizePx, dx, dy) => {
   const colIndex = getIndex(cellSizePx, -cellSizePx * .5, dx) + hardCoded3x3Value;
   const rowIndex = getIndex(cellSizePx, -cellSizePx * .5, dy) + hardCoded3x3Value;
 
-  console.log({ rows, cols, rowIndex, colIndex })
-
   return validIndices(rows, cols, rowIndex, colIndex) ?
     colIndex + rowIndex * cols :
     null;

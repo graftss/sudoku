@@ -12,5 +12,5 @@
 .capture-mousedown {
   height: var(--mousedown-capture-size);
   width: var(--mousedown-capture-size);
-  background-color: lightblue;
+  background-color: lightgreen;
 }

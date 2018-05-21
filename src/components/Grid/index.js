@@ -3,31 +3,6 @@ import React from 'react';
 import './Grid.css';
 import Cell from '../Cell';
 
-const puzzle = [
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-];
-
-const blank = null;
-const blankPuzzle = [
-  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
-  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
-  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
-  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
-  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
-  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
-  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
-  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
-  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
-];
-
 const computeSides = (dim, rowIndex, colIndex) => {
   const result = { divider: [], edge: [] };
   const size = dim * dim;
@@ -47,12 +22,15 @@ const computeSides = (dim, rowIndex, colIndex) => {
   return result;
 };
 
-export default () => (
+export default ({
+  puzzle,
+  setValueAt,
+}) => (
   <div className="grid-container">
     <table className="grid noselect">
       <tbody>
-        {blankPuzzle.map((row, rowIndex) => (
-          <tr>
+        {puzzle.map((row, rowIndex) => (
+          <tr key={rowIndex}>
             {row.map(
               (content, colIndex) => {
                 const sides = computeSides(3, rowIndex, colIndex);
@@ -61,7 +39,8 @@ export default () => (
                   <Cell
                     dividerSides={sides.divider}
                     edgeSides={sides.edge}
-                    key={`${rowIndex},${colIndex}`}
+                    key={colIndex}
+                    setValue={v => setValueAt(rowIndex, colIndex, v)}
                   >
                     {content}
                   </Cell>
