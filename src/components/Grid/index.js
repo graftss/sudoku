@@ -15,6 +15,19 @@ const puzzle = [
   [1, 2, 3, 4, 5, 6, 7, 8, 9],
 ];
 
+const blank = null;
+const blankPuzzle = [
+  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
+  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
+  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
+  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
+  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
+  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
+  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
+  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
+  [blank, blank, blank, blank, blank, blank, blank, blank, blank],
+];
+
 const computeSides = (dim, rowIndex, colIndex) => {
   const result = { divider: [], edge: [] };
   const size = dim * dim;
@@ -38,7 +51,7 @@ export default () => (
   <div className="grid-container">
     <table className="grid noselect">
       <tbody>
-        {puzzle.map((row, rowIndex) => (
+        {blankPuzzle.map((row, rowIndex) => (
           <tr>
             {row.map(
               (content, colIndex) => {

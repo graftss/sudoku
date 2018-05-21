@@ -15,7 +15,9 @@ export default ({
   dividerSides,
   edgeSides,
 }) => (
-  <td className={getClassName(dividerSides, edgeSides)}>
+  <td
+    className={getClassName(dividerSides, edgeSides)}
+  >
     {children}
   </td>
 );

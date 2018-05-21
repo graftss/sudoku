@@ -1,0 +1,16 @@
+:root {
+  --mousedown-capture-size: 30px;
+}
+
+.cell-picker-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 40px;
+}
+
+.capture-mousedown {
+  height: var(--mousedown-capture-size);
+  width: var(--mousedown-capture-size);
+  background-color: lightblue;
+}
