@@ -21,6 +21,8 @@ export default class extends Component {
         x: null,
         y: null,
       },
+
+      value: null,
     };
   }
 
@@ -48,6 +50,7 @@ export default class extends Component {
 
   renderCellPicker() {
     const { x, y } = this.state.picker;
+    console.log(this.props.isClue);
 
     return (
       <CellPicker
@@ -78,8 +81,10 @@ export default class extends Component {
 
   render() {
     const { active } = this.state.picker;
-    const { children } = this.props;
+    const { children, isClue } = this.props;
 
-    return active ? this.renderCellPicker() : this.renderCell(children);
+    return (active && !isClue) ?
+      this.renderCellPicker() :
+      this.renderCell(children);
   }
 }
