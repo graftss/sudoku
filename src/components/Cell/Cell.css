@@ -10,6 +10,16 @@
 
   width: 25px;
   height: 25px;
+  font-size: 25px;
+}
+
+.cell-clue {
+  font-weight: bolder;
+}
+
+.cell-input {
+  color: #666;
+  font-weight: lighter;
 }
 
 .cell:hover {

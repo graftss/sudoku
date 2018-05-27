@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 import CellPicker from '../CellPicker';
 import './Cell.css';
 
-const getClassName = (dividerSides = [], edgeSides = []) => (
+const getClassName = (dividerSides = [], edgeSides = [], isClue) => (
   [
     'cell',
+    isClue ? 'cell-clue' : 'cell-input',
     ...dividerSides.map(side => `cell-divider-${side}`),
     ...edgeSides.map(side => `cell-edge-${side}`),
   ].join(' ')
@@ -67,11 +68,11 @@ export default class extends Component {
   }
 
   renderCell = content => {
-    const { dividerSides, edgeSides } = this.props;
+    const { dividerSides, edgeSides, isClue } = this.props;
 
     return (
       <td
-        className={getClassName(dividerSides, edgeSides)}
+        className={getClassName(dividerSides, edgeSides, isClue)}
         onMouseDown={this.onMouseDown}
       >
         {content}
