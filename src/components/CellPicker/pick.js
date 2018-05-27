@@ -1,18 +1,22 @@
-const getIndex = (cellSize, offset, position) => (
-  Math.floor((position - offset) / cellSize)
-);
+const pi = Math.PI;
+const pi8 = pi / 8;
 
-const hardCoded3x3Value = 1;
+export default (innerRadius, outerRadius, dx, dy) => {
+  const distance = Math.hypot(dx, dy);
 
-const validIndices = (rows, cols, rowIndex, colIndex) => (
-  rowIndex >= 0 && rowIndex < rows && colIndex >= 0 && colIndex < cols
-);
+  let angle = Math.atan2(dx, dy);
+  if (angle < 0) angle += 2 * pi;
 
-export default (rows, cols, cellSizePx, dx, dy) => {
-  const colIndex = getIndex(cellSizePx, -cellSizePx * .5, dx) + hardCoded3x3Value;
-  const rowIndex = getIndex(cellSizePx, -cellSizePx * .5, dy) + hardCoded3x3Value;
+  if (distance < innerRadius) return 4;
 
-  return validIndices(rows, cols, rowIndex, colIndex) ?
-    colIndex + rowIndex * cols :
-    null;
+  if (distance > outerRadius) return null;
+
+  if (angle > pi + 5 * pi8 && angle < pi + 7 * pi8) return 6;
+  if (angle > pi + 3 * pi8 && angle < pi + 5 * pi8) return 3;
+  if (angle > pi +     pi8 && angle < pi + 3 * pi8) return 0;
+  if (angle > pi -     pi8 && angle < pi +     pi8) return 1;
+  if (angle > pi - 3 * pi8 && angle < pi -     pi8) return 2;
+  if (angle > pi - 5 * pi8 && angle < pi - 3 * pi8) return 5;
+  if (angle > pi - 7 * pi8 && angle < pi - 5 * pi8) return 8;
+  return 7;
 };
