@@ -1,12 +1,12 @@
 import { argCreator, keyMirror } from '../../utils';
 
 export const TYPES = keyMirror([
-  'PUZZLE_CLUES_SET',
+  'PUZZLE_SET',
   'PUZZLE_CELL_CLEAR',
   'PUZZLE_CELL_SET',
 ]);
 
-export const setClues = argCreator(TYPES.PUZZLE_CLUES_SET, ['clues']);
+export const setPuzzle = argCreator(TYPES.PUZZLE_SET, ['puzzleString']);
 
 export const clearCell = argCreator(TYPES.PUZZLE_CELL_CLEAR, ['row', 'col']);
 

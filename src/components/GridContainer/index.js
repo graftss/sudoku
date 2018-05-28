@@ -1,27 +1,35 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import connect from '../../state/connect';
 import Grid from '../Grid';
 
 const connections = {
-  actions: ['setCell'],
-  selectors: ['puzzleClues', 'puzzleInput'],
+  actions: ['setCell', 'setPuzzle'],
+  selectors: ['puzzle'],
 };
 
 class GridContainer extends Component {
+  loadPuzzle = () => {
+    this.props.setPuzzle(
+      'c6a1a2a2a9b51b81b4c65a8a3d4a1a5a3a2d8a7a47c2b61b35b4a7a8a4a7c'
+    );
+  }
+
   setValueAt = (rowIndex, colIndex, value) => {
     this.props.setCell(rowIndex, colIndex, value);
   }
 
   render() {
-    const { puzzleClues, puzzleInput } = this.props;
+    const { puzzle } = this.props;
 
     return (
-      <Grid
-        clues={puzzleClues}
-        input={puzzleInput}
-        setValueAt={this.setValueAt}
-      />
+      <Fragment>
+        <Grid
+          puzzle={puzzle}
+          setValueAt={this.setValueAt}
+        />
+        <button onClick={this.loadPuzzle}>hi</button>
+      </Fragment>
     );
   }
 }

@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import CellPicker from '../CellPicker';
 import './Cell.css';
 
-const getClassName = (dividerSides = [], edgeSides = [], isClue) => (
+const getClassName = (dividerSides = [], edgeSides = [], fixed) => (
   [
     'cell',
-    isClue ? 'cell-clue' : 'cell-input',
+    fixed ? 'cell-clue' : 'cell-input',
     ...dividerSides.map(side => `cell-divider-${side}`),
     ...edgeSides.map(side => `cell-edge-${side}`),
   ].join(' ')
@@ -51,7 +51,7 @@ export default class extends Component {
 
   renderCellPicker() {
     const { x, y } = this.state.picker;
-    console.log(this.props.isClue);
+    console.log(this.props.fixed);
 
     return (
       <CellPicker
@@ -68,11 +68,11 @@ export default class extends Component {
   }
 
   renderCell = content => {
-    const { dividerSides, edgeSides, isClue } = this.props;
+    const { dividerSides, edgeSides, fixed } = this.props;
 
     return (
       <td
-        className={getClassName(dividerSides, edgeSides, isClue)}
+        className={getClassName(dividerSides, edgeSides, fixed)}
         onMouseDown={this.onMouseDown}
       >
         {content}
@@ -82,9 +82,9 @@ export default class extends Component {
 
   render() {
     const { active } = this.state.picker;
-    const { children, isClue } = this.props;
+    const { children, fixed } = this.props;
 
-    return (active && !isClue) ?
+    return (active && !fixed) ?
       this.renderCellPicker() :
       this.renderCell(children);
   }

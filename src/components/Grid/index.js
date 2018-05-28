@@ -23,30 +23,28 @@ const computeSides = (dim, rowIndex, colIndex) => {
 };
 
 export default ({
-  clues,
-  input,
+  puzzle,
   setValueAt,
 }) => (
   <div className="grid-container">
     <table className="grid noselect">
       <tbody>
-        {clues.map((row, rowIndex) => (
+        {puzzle.map((row, rowIndex) => (
           <tr key={rowIndex}>
             {row.map(
-              (clue, colIndex) => {
+              (cellData, colIndex) => {
                 const sides = computeSides(3, rowIndex, colIndex);
-                const isClue = clue !== null;
-                const content = isClue ? clue : input[rowIndex][colIndex];
+                const { fixed, value } = cellData;
 
                 return (
                   <Cell
                     dividerSides={sides.divider}
                     edgeSides={sides.edge}
-                    isClue={isClue}
+                    fixed={fixed}
                     key={colIndex}
                     setValue={v => setValueAt(rowIndex, colIndex, v)}
                   >
-                    {content}
+                    {value}
                   </Cell>
                 );
               }

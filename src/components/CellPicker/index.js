@@ -37,7 +37,7 @@ export default class CellPicker extends Component {
   }
 
   updateDisplay(dx, dy) {
-    const { cellSizePx, cols, mapIndex, rows } = this.props;
+    const { mapIndex } = this.props;
 
     const index = pick(15, 60, dx, dy);
     const selection = mapIndex ? mapIndex(index) : index;
@@ -46,8 +46,8 @@ export default class CellPicker extends Component {
   }
 
   render() {
-    const { selection } = this.state;
     const { render } = this.props;
+    const { selection } = this.state;
 
     return render(selection);
   }
