@@ -43,9 +43,8 @@ export default ({
                     fixed={fixed}
                     key={colIndex}
                     setValue={v => setValueAt(rowIndex, colIndex, v)}
-                  >
-                    {value}
-                  </Cell>
+                    value={value}
+                  />
                 );
               }
             )}

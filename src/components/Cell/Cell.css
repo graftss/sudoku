@@ -22,8 +22,8 @@
   font-weight: lighter;
 }
 
-.cell:hover {
-  /*background-color: red;*/
+.cell.cell-active {
+  background-color: rgba(0, 0, 0, 0.08);
 }
 
 .cell-edge-right {

@@ -1,20 +1,28 @@
 import { Component } from 'react';
 
 import pick from './pick';
-import './CellPicker.css';
 
 export default class CellPicker extends Component {
   constructor() {
     super();
 
-    this.state = { selection: null };
+    this.state = {
+      hasMoved: false,
+      selection: null,
+    };
   }
 
   componentDidMount() {
+    const { initialValue } = this.props;
+
     window.addEventListener('mouseup', this.onMouseUp, false);
     window.addEventListener('mousemove', this.onMouseMove, false);
 
-    this.updateDisplay(0, 0);
+    if (initialValue === null) {
+      this.updateDisplay(0, 0);
+    } else {
+      this.setState({ selection: initialValue });
+    }
   }
 
   componentWillUnmount() {
@@ -26,14 +34,24 @@ export default class CellPicker extends Component {
     const { onMouseUp } = this.props;
     const { selection } = this.state;
 
-    onMouseUp && onMouseUp(selection);
+    const value =
+      this.props.initialValue !== null && !this.state.hasMoved ?
+        null :
+        selection;
+
+    onMouseUp && onMouseUp(value);
   }
 
   onMouseMove = e => {
     const { x, y } = this.props;
+    const { hasMoved } = this.state;
     const { clientX, clientY } = e;
 
     this.updateDisplay(clientX - x, clientY - y);
+
+    if (!hasMoved) {
+      this.setState({ hasMoved: true });
+    }
   }
 
   updateDisplay(dx, dy) {

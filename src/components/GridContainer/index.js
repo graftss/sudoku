@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import connect from '../../state/connect';
 import Grid from '../Grid';
@@ -9,6 +9,10 @@ const connections = {
 };
 
 class GridContainer extends Component {
+  componentDidMount() {
+    this.loadPuzzle();
+  }
+
   loadPuzzle = () => {
     this.props.setPuzzle(
       'c6a1a2a2a9b51b81b4c65a8a3d4a1a5a3a2d8a7a47c2b61b35b4a7a8a4a7c'
@@ -23,13 +27,10 @@ class GridContainer extends Component {
     const { puzzle } = this.props;
 
     return (
-      <Fragment>
-        <Grid
-          puzzle={puzzle}
-          setValueAt={this.setValueAt}
-        />
-        <button onClick={this.loadPuzzle}>hi</button>
-      </Fragment>
+      <Grid
+        puzzle={puzzle}
+        setValueAt={this.setValueAt}
+      />
     );
   }
 }
